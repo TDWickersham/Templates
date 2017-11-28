@@ -52,7 +52,7 @@ size_t intVector::getSize() const
 
 bool intVector::empty() const
 {
-	return size == 0;
+	return size == 0 ? true : false;
 }
 
 int intVector::front() const
@@ -79,7 +79,7 @@ bool intVector::grow(size_t minSize)
 
 
 	int* newData = new int[capacity];
-	memcpy(newData, data, size);
+	memcpy(newData, data,sizeof(int) * size);
 
 	delete[] data;
 	data = newData;

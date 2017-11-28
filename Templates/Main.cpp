@@ -24,7 +24,7 @@ void Print(T arg)
 }
 
 template<typename T>
-int Min(T a, T b)
+T Min(T a, T b)
 {
 	if (a < b)
 	{
@@ -66,6 +66,16 @@ T Clamp(T clamp, T top, T bottom)
 	}
 }
 
+template<typename T>
+void Swap(T a, T b)
+{
+	T c;
+	c = b;
+	b = a;
+	a = c;
+	std::cout << a << " , " << b << std::endl;
+}
+
 template<typename T, typename S>
 void Person(T name, S age)
 {
@@ -73,7 +83,47 @@ void Person(T name, S age)
 	std::cout << age << std::endl;
 }
 
+template<>
+char Min(char a, char b)
+{
+	return a < b ? a : b;
+}
 
+template<>
+char Max(char a, char b)
+{
+	return a > b ? a : b;
+}
+
+template<bool T>
+bool AssertedBool(bool arg)
+{
+	if (arg == T)
+	{
+		return true;
+	}
+	abort();
+}
+
+template<typename T>
+bool AssertedEqual(T x, T y)
+{
+	if (x == y)
+	{
+		return true;
+	}
+		abort();
+}
+
+template<typename T>
+bool AssertedNotEqual(T x, T y)
+{
+	if (x != y)
+	{
+		return true;
+	}
+		abort();
+}
 
 int main()
 {
@@ -95,6 +145,29 @@ int main()
 	std::cout << Clamp<int>(2, 20, 5) << std::endl;
 
 	Person<char const*, int>("Caleb", 21);
+
+	Swap<int>(2, 3);
+	
+	char charA = 'a';
+	char charB = 'b';
+
+	std::cout << "Min char alphabetically: " << Min(charA, charB) << std::endl;
+
+	char charY = 'y';
+	char charZ = 'z';
+
+	std::cout << "Max char alphabetically: " << Max(charY, charZ) << std::endl;
+
+	if (AssertedBool<true>(true));
+
+	//if (AssertedBool<false>(true));
+
+	if (AssertedEqual<int>(5, 5));
+
+	//if (AssertedEqual<float>(4.0f, 5.0f));
+
+	if (AssertedNotEqual<int>(4, 5));
+	//if (AssertedNotEqual<float>(5.0f, 5.0f));
 
 	system("pause");
 }
