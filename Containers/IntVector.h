@@ -27,6 +27,7 @@ public:
 
 
 
+
 private:
 	bool grow(size_t minSize);
 };
