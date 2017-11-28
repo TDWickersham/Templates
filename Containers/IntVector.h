@@ -31,8 +31,11 @@ public:
 	void erase(int idx);
 
 	int count(int value);
+	void insert(int value, int idx);
 
+	void reserve(int elements);
 
+	void compact();
 
 private:
 	bool grow(size_t minSize);

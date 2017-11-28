@@ -57,6 +57,17 @@ int main()
 	AssertedEqual(nums.count(22), 2);
 
 	nums.erase(0);
+	AssertedEqual(nums.front(), 42);
+	nums.insert(78, 2);
+	AssertedEqual(nums.at(2), 78);
+	nums.clear();
+	nums.reserve(10);
+	AssertedBool<true>(nums.getCapacity() >= 10);
+	nums.append(56);
+	nums.append(90);
+	nums.append(34);
+	nums.compact();
+	AssertedEqual(nums.getCapacity(), nums.getSize());
 
 	return 0;
 }

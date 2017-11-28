@@ -1,5 +1,7 @@
 #include "IntVector.h"
+#include <iostream>
 #include <cassert>
+#include <cstdlib>
 #include <cstring>
 
 float intVector::operator[](unsigned idx) const
@@ -104,6 +106,53 @@ int intVector::count(int value)
 			counter++;
 	}
 	return counter;
+}
+
+void intVector::insert(int value, int idx)
+{
+	int* temp;
+
+	if (idx < 0)
+		abort();
+
+	else if (size + 1 > capacity)
+		grow(size + 1);
+	size++;
+	temp = new int[capacity];
+
+	memcpy(temp, data, sizeof(int) * size);
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (i < idx)
+			data[i] = temp[i];
+		else if (i == idx)
+			data[i] = value;
+		else
+			data[i] = temp[i - 1];
+	}
+
+	delete[] temp;
+}
+
+void intVector::reserve(int elements)
+{
+	if (elements >= capacity)
+	{
+		grow(elements + 1);
+	}
+}
+
+void intVector::compact()
+{
+	int* newData = new int[size];
+	for (int i = 0; i < size; ++i)
+	{
+		newData[i] = data[i];
+	}
+	capacity = size;
+	delete[] data;
+	data = newData;
 }
 
 bool intVector::grow(size_t minSize)
