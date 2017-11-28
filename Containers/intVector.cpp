@@ -21,8 +21,8 @@ intVector::~intVector()
 
 int& intVector::at(size_t idx)
 {
-	assert(idx > 0);
-	assert(idx <= size);
+	assert(idx >= 0);
+	assert(idx < size);
 	return data[idx];
 
 }
@@ -68,6 +68,42 @@ int intVector::front() const
 int intVector::back() const
 {
 	return data[size - 1];
+}
+
+void intVector::clear()
+{
+	capacity = 2;
+	int* newData = new int[capacity];
+	delete[] data;
+	data = newData;
+	size = 0;
+}
+
+void intVector::erase(int idx)
+{
+	int* temp = data;
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (i < idx)
+			data[i] = temp[i];
+		else
+			data[i] = temp[i + 1];
+	}
+
+	size--;
+}
+
+int intVector::count(int value)
+{
+	int counter = 0;
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (data[i] == value)
+			counter++;
+	}
+	return counter;
 }
 
 bool intVector::grow(size_t minSize)

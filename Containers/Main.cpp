@@ -44,9 +44,19 @@ int main()
 	AssertedEqual(nums.raw(), &nums.at(0));
 
 	AssertedEqual<size_t>(nums[0], 1);
+	nums.clear();
+	AssertedBool<true>(nums.getSize() == 0);
+	AssertedBool<true>(nums.getCapacity() == 2);
+	AssertedBool<true>(nums.empty());
 	
-	
-	
+	nums.append(22);
+	nums.append(42);
+	nums.append(22);
+
+	AssertedEqual<size_t>(nums.getSize(), 3);
+	AssertedEqual(nums.count(22), 2);
+
+	nums.erase(0);
 
 	return 0;
 }

@@ -27,7 +27,10 @@ public:
 	int front() const;
 	int back() const;
 
+	void clear();
+	void erase(int idx);
 
+	int count(int value);
 
 
 
