@@ -39,6 +39,14 @@ public:
 	void erase(int idx);
 
 	void pop();
+
+	T count(int value);
+
+	void insert(int value, int idx);
+
+	void reserve(int elements);
+
+	void compact();
 };
 
 template<typename T>
@@ -141,4 +149,67 @@ template<typename T>
 tVector::pop()
 {
 	erase(size - 1);
+}
+
+template<typename T>
+tVector::count(int value)
+{
+	int counter = 0;
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (data[i] == value)
+			counter++;
+	}
+	return counter;
+}
+
+template<typename T>
+tVector::insert(int value, int idx)
+{
+	int* temp;
+
+	if (idx < 0)
+		abort();
+
+	else if (size + 1 > capacity)
+		grow(size + 1);
+	size++;
+	temp = new int[capacity];
+
+	memcpy(temp, data, sizeof(int) * size);
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (i < idx)
+			data[i] = temp[i];
+		else if (i == idx)
+			data[i] = value;
+		else
+			data[i] = temp[i - 1];
+	}
+
+	delete[] temp;
+}
+
+template<typename T>
+tVector::reserve(int elements)
+{
+	if (elements >= capacity)
+	{
+		grow(elements + 1);
+	}
+}
+
+template<typename T>
+tVector::compact()
+{
+	int* newData = new int[size];
+	for (int i = 0; i < size; ++i)
+	{
+		newData[i] = data[i];
+	}
+	capacity = size;
+	delete[] data;
+	data = newData;
 }
