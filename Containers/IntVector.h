@@ -7,6 +7,8 @@ class intVector
 	size_t size;
 
 public:
+	float operator[](unsigned idx) const;
+
 	intVector();
 	~intVector();
 	
@@ -24,6 +26,7 @@ public:
 
 	int front() const;
 	int back() const;
+
 
 
 

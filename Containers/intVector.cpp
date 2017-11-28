@@ -2,6 +2,11 @@
 #include <cassert>
 #include <cstring>
 
+float intVector::operator[](unsigned idx) const
+{
+	return data[idx];
+}
+
 intVector::intVector()
 {
 	capacity = 2;
