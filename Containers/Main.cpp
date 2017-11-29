@@ -1,4 +1,4 @@
-#include "IntVector.h"
+#include "tvector.h"
 #include <iostream>
 
 template<bool T>
@@ -23,7 +23,7 @@ bool AssertedEqual(T x, T y)
 
 int main()
 {
-	intVector nums;
+	tVector<int>nums;
 	AssertedBool<true>(nums.empty());
 	AssertedEqual<size_t>(nums.getCapacity(), 2);
 	nums.append(1);
@@ -41,7 +41,7 @@ int main()
 	AssertedEqual<size_t>(nums.getSize(), 3);
 	AssertedEqual(nums.front(), 1);
 	AssertedEqual(nums.back(), 33);
-	AssertedEqual(nums.raw(), &nums.at(0));
+	AssertedEqual(nums.c_ptr(), &nums.at(0));
 
 	AssertedEqual<size_t>(nums[0], 1);
 	nums.clear();

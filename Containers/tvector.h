@@ -9,7 +9,8 @@ class tVector
 
 public:
 
-	float operator[](unsigned idx) const
+	T  operator[](unsigned idx) const;
+	
 	tVector()
 	{
 		capacity = 2;
@@ -24,9 +25,9 @@ public:
 
 	T* c_ptr() const;
 
-	size_t capacity() const;
+	size_t getCapacity() const;
 
-	size_t size() const;
+	size_t getSize() const;
 
 	bool empty() const;
 
@@ -50,19 +51,19 @@ public:
 };
 
 template<typename T>
-tVector::operator[](unsigned idx) const
+tVector<T>::operator[](unsigned idx) const
 {
 	return data[idx];
 }
 
 template<typename T>
-tVector::~tVector()
+tVector<T>::~tVector()
 {
 	delete[] data;
 }
 
 template<typename T>
-tVector::at(size_t idx)
+tVector<T>::at(size_t idx)
 {
 	assert(idx >= 0);
 	assert(idx < size);
@@ -70,7 +71,7 @@ tVector::at(size_t idx)
 }
 
 template<typename T>
-tVector::append(T val)
+tVector<T>::append(T val)
 {
 	if (size == capacity)
 	{
@@ -84,55 +85,55 @@ tVector::append(T val)
 }
 
 template<typename T>
-tVector::c_ptr() const
+tVector<T>::c_ptr() const
 {
 	return data;
 }
 
 template<typename T>
-tVector::capacity() const
+tVector<T>::getCapacity() const
 {
 	return capacity;
 }
 
 template<typename T>
-tVector::size() const
+tVector<T>::getSize() const
 {
 	return size;
 }
 
 template<typename T>
-tVector::clear()
+tVector<T>::clear()
 {
 	capacity = 2;
-	int* newData = new int[capacity];
+	T* newData = new T[capacity];
 	delete[] data;
 	data = newData;
 	size = 0;
 }
 
 template<typename T>
-tVector::empty() const
+tVector<T>::empty() const
 {
 	return size == 0 ? true : false;
 }
 
 template<typename T>
-tVector::front() const
+tVector<T>::front() const
 {
 	return data[0];
 }
 
 template<typename T>
-tVector::back() const
+tVector<T>::back() const
 {
 	return data[size - 1];
 }
 
 template<typname T>
-tVector::erase(int idx)
+tVector<T>::erase(int idx)
 {
-	int* temp = data;
+	T* temp = data;
 
 	for (int i = 0; i < size; ++i)
 	{
@@ -146,13 +147,13 @@ tVector::erase(int idx)
 }
 
 template<typename T>
-tVector::pop()
+tVector<T>::pop()
 {
 	erase(size - 1);
 }
 
 template<typename T>
-tVector::count(int value)
+tVector<T>::count(int value)
 {
 	int counter = 0;
 
@@ -165,9 +166,9 @@ tVector::count(int value)
 }
 
 template<typename T>
-tVector::insert(int value, int idx)
+tVector<T>::insert(int value, int idx)
 {
-	int* temp;
+	T* temp = new T[capacity];
 
 	if (idx < 0)
 		abort();
@@ -175,7 +176,7 @@ tVector::insert(int value, int idx)
 	else if (size + 1 > capacity)
 		grow(size + 1);
 	size++;
-	temp = new int[capacity];
+	temp = new T[capacity];
 
 	memcpy(temp, data, sizeof(int) * size);
 
@@ -193,7 +194,7 @@ tVector::insert(int value, int idx)
 }
 
 template<typename T>
-tVector::reserve(int elements)
+tVector<T>::reserve(int elements)
 {
 	if (elements >= capacity)
 	{
@@ -202,9 +203,9 @@ tVector::reserve(int elements)
 }
 
 template<typename T>
-tVector::compact()
+tVector<T>::compact()
 {
-	int* newData = new int[size];
+	T* newData = new T[size];
 	for (int i = 0; i < size; ++i)
 	{
 		newData[i] = data[i];
