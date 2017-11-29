@@ -1,4 +1,8 @@
 #pragma once
+#include <cassert>
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
 
 template<typename T>
 class tVector
@@ -9,8 +13,8 @@ class tVector
 
 public:
 
-	T  operator[](unsigned idx) const;
-	
+	T const operator[](unsigned idx) const;
+	T& operator[](unsigned idx);
 	tVector()
 	{
 		capacity = 2;
@@ -41,17 +45,26 @@ public:
 
 	void pop();
 
-	T count(int value);
+	T count(T value);
 
-	void insert(int value, int idx);
+	void insert(T value, int idx);
 
 	void reserve(int elements);
 
 	void compact();
+
+private:
+	bool grow(size_t minSize);
 };
 
 template<typename T>
-tVector<T>::operator[](unsigned idx) const
+T const tVector<T>::operator[](unsigned idx) const
+{
+	return data[idx];
+}
+
+template<typename T>
+T& tVector<T>::operator[](unsigned idx)
 {
 	return data[idx];
 }
@@ -63,7 +76,7 @@ tVector<T>::~tVector()
 }
 
 template<typename T>
-tVector<T>::at(size_t idx)
+T& tVector<T>::at(size_t idx)
 {
 	assert(idx >= 0);
 	assert(idx < size);
@@ -71,7 +84,7 @@ tVector<T>::at(size_t idx)
 }
 
 template<typename T>
-tVector<T>::append(T val)
+T& tVector<T>::append(T val)
 {
 	if (size == capacity)
 	{
@@ -85,25 +98,25 @@ tVector<T>::append(T val)
 }
 
 template<typename T>
-tVector<T>::c_ptr() const
+T* tVector<T>::c_ptr() const
 {
 	return data;
 }
 
 template<typename T>
-tVector<T>::getCapacity() const
+size_t tVector<T>::getCapacity() const
 {
 	return capacity;
 }
 
 template<typename T>
-tVector<T>::getSize() const
+size_t tVector<T>::getSize() const
 {
 	return size;
 }
 
 template<typename T>
-tVector<T>::clear()
+void tVector<T>::clear()
 {
 	capacity = 2;
 	T* newData = new T[capacity];
@@ -113,25 +126,25 @@ tVector<T>::clear()
 }
 
 template<typename T>
-tVector<T>::empty() const
+bool tVector<T>::empty() const
 {
 	return size == 0 ? true : false;
 }
 
 template<typename T>
-tVector<T>::front() const
+T tVector<T>::front() const
 {
 	return data[0];
 }
 
 template<typename T>
-tVector<T>::back() const
+T tVector<T>::back() const
 {
 	return data[size - 1];
 }
 
-template<typname T>
-tVector<T>::erase(int idx)
+template<typename T>
+void tVector<T>::erase(int idx)
 {
 	T* temp = data;
 
@@ -147,13 +160,13 @@ tVector<T>::erase(int idx)
 }
 
 template<typename T>
-tVector<T>::pop()
+void tVector<T>::pop()
 {
 	erase(size - 1);
 }
 
 template<typename T>
-tVector<T>::count(int value)
+T tVector<T>::count(T value)
 {
 	int counter = 0;
 
@@ -166,7 +179,7 @@ tVector<T>::count(int value)
 }
 
 template<typename T>
-tVector<T>::insert(int value, int idx)
+void tVector<T>::insert(T value, int idx)
 {
 	T* temp = new T[capacity];
 
@@ -176,9 +189,9 @@ tVector<T>::insert(int value, int idx)
 	else if (size + 1 > capacity)
 		grow(size + 1);
 	size++;
-	temp = new T[capacity];
+	//temp = new T[capacity];
 
-	memcpy(temp, data, sizeof(int) * size);
+	memcpy(temp, data, sizeof(T) * size);
 
 	for (int i = 0; i < size; ++i)
 	{
@@ -194,7 +207,7 @@ tVector<T>::insert(int value, int idx)
 }
 
 template<typename T>
-tVector<T>::reserve(int elements)
+void tVector<T>::reserve(int elements)
 {
 	if (elements >= capacity)
 	{
@@ -203,7 +216,7 @@ tVector<T>::reserve(int elements)
 }
 
 template<typename T>
-tVector<T>::compact()
+void tVector<T>::compact()
 {
 	T* newData = new T[size];
 	for (int i = 0; i < size; ++i)
@@ -213,4 +226,27 @@ tVector<T>::compact()
 	capacity = size;
 	delete[] data;
 	data = newData;
+}
+
+template<typename T>
+bool tVector<T>::grow(size_t minSize)
+{
+	assert(minSize <= 64000);
+	if (minSize <= capacity)
+	{
+		return true;
+	}
+	while (capacity < minSize)
+	{
+		capacity *= 2;
+	}
+
+
+	T* newData = new T[capacity];
+	memcpy(newData, data, sizeof(T) * size);
+
+	delete[] data;
+	data = newData;
+
+	return true;
 }
