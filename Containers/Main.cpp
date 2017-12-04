@@ -1,5 +1,6 @@
 #include "tvector.h"
 #include <iostream>
+#include "intlinkedlist.h"
 
 template<bool T>
 bool AssertedBool(bool arg)
@@ -21,9 +22,19 @@ bool AssertedEqual(T x, T y)
 	abort();
 }
 
+
 int main()
 {
-	tVector<float>nums;
+	intLinkedList nums;
+	nums.append(1);
+	nums.append(2);
+	nums.append(3);
+	nums.append(4);
+
+	AssertedEqual(nums.at(2), 3);
+	AssertedEqual(nums.at(7), 0);
+
+	/*tVector<float>nums;
 	AssertedBool<true>(nums.empty());
 	AssertedEqual<size_t>(nums.getCapacity(), 2);
 	nums.append(1);
@@ -67,7 +78,7 @@ int main()
 	nums.append(90);
 	nums.append(34);
 	nums.compact();
-	AssertedEqual(nums.getCapacity(), nums.getSize());
+	AssertedEqual(nums.getCapacity(), nums.getSize());*/
 
 	return 0;
 }
