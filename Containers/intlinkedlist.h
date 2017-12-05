@@ -7,6 +7,7 @@ public:
 	{
 		int value;
 		intLinkedListNode* next;
+		intLinkedListNode* prev;
 	};
 
 	intLinkedList();
@@ -24,6 +25,13 @@ public:
 
 	int back() const;
 
+	void clear();
+
+	void erase(size_t idx);
+
+	int count(int value);
+
+	void insert(size_t idx, int value);
 private:
 	
 	intLinkedListNode* head;

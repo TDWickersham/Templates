@@ -1,4 +1,6 @@
 #include "tvector.h"
+
+#include<algorithm>
 #include <iostream>
 #include "intlinkedlist.h"
 
@@ -20,6 +22,18 @@ bool AssertedEqual(T x, T y)
 		return true;
 	}
 	abort();
+}
+
+template<typename T>
+int addRange(const tVector<int>& nums)
+{
+	T total = 0;
+	for (int i = 0; i < nums.getSize(); ++i)
+	{
+		total += nums[i];
+	}
+
+	return total;
 }
 
 
