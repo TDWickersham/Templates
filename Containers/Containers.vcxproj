@@ -115,8 +115,12 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithem.h" />
     <ClInclude Include="intlinkedlist.h" />
     <ClInclude Include="IntVector.h" />
+    <ClInclude Include="Iterator.h" />
+    <ClInclude Include="queu.h" />
+    <ClInclude Include="stack.h" />
     <ClInclude Include="tvector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

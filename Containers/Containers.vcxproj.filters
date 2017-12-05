@@ -35,5 +35,17 @@
     <ClInclude Include="intlinkedlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="queu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include<algorithm>
 #include <iostream>
 #include "intlinkedlist.h"
+#include "Algorithem.h"
 
 template<bool T>
 bool AssertedBool(bool arg)
@@ -24,29 +25,18 @@ bool AssertedEqual(T x, T y)
 	abort();
 }
 
-template<typename T>
-int addRange(const tVector<int>& nums)
-{
-	T total = 0;
-	for (int i = 0; i < nums.getSize(); ++i)
-	{
-		total += nums[i];
-	}
-
-	return total;
-}
 
 
 int main()
 {
-	intLinkedList nums;
+	/*intLinkedList nums;
 	nums.append(1);
 	nums.append(2);
 	nums.append(3);
 	nums.append(4);
 
 	AssertedEqual(nums.at(2), 3);
-	AssertedEqual(nums.at(7), 0);
+	AssertedEqual(nums.at(7), 0);*/
 
 	/*tVector<float>nums;
 	AssertedBool<true>(nums.empty());
