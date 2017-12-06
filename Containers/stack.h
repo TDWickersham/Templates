@@ -11,10 +11,3 @@ public:
 
 };
 
-class queu
-{
-private:
-	intLinkedList list;
-public:
-
-};
