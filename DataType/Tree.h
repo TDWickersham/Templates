@@ -1,12 +1,15 @@
 #pragma once
 #include <cassert>
 #include <iostream>
+#include <deque>
+#include <climits>
+#include <vector>
 
 struct node
 {
 	int key_value;
 	node *left;
-	node *right;
+	node*right;
 };
 
 class tree

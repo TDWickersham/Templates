@@ -1,7 +1,11 @@
 #include <iostream>
-#include <cassert>
+#include "Tree.h"
+
+
 
 int main
 {
 
+
+	system("pause")
 }
