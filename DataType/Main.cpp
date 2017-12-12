@@ -27,4 +27,14 @@ int main()
 	assert(base.search(3) != NULL);
 
 	system("pause");
+
+	base.insert(2);
+	
+	assert(base.search(4) != NULL);
+
+	assert(base.search(3) != NULL);
+
+	assert(base.search(2) != NULL);
+
+	system("pause");
 }
