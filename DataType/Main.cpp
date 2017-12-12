@@ -6,19 +6,25 @@
 
 int main()
 {
-	tree root;
+	tree base;
 
-	root.insert(3);
+	base.insert(3);
 
-	assert(root.search(3) != NULL);
+	assert(base.search(3) != NULL);
 
-	root.destroy_tree;
+	base.destroy_tree();
 	
 	system("pause");
 
-	root.insert(4);
+	base.insert(4);
 
-	assert(root.search(4) != NULL);
+	assert(base.search(4) != NULL);
+
+	system("pause");
+
+	base.insert(3);
+
+	assert(base.search(3) != NULL);
 
 	system("pause");
 }

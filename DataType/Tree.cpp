@@ -31,6 +31,7 @@ node * tree::search(int key)
 void tree::destroy_tree()
 {
 	destroy_tree(root);
+	root = nullptr;
 }
 
 void tree::destroy_tree(node *leaf)
